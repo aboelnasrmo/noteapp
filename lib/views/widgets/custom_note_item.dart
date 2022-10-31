@@ -1,8 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
+
+import '../../models/note.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
+  const NoteItem({
+    Key? key,
+    this.title,
+    this.desc,
+    this.index,
+  }) : super(key: key);
+  final String? title;
+  final String? desc;
+  final int? index;
+  // final Future<void> index;
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +31,22 @@ class NoteItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           ListTile(
-            title: const Text(
-              'Flutter tips',
-              style: TextStyle(color: Colors.black, fontSize: 26),
+            title: Text(
+              title.toString(),
+              style: const TextStyle(color: Colors.black, fontSize: 26),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 16.0, bottom: 16),
               child: Text(
-                'Build your career with Aboelnasr',
+                desc.toString(),
                 style: TextStyle(
                     color: Colors.black.withOpacity(0.5), fontSize: 18),
               ),
             ),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Hive.box<Note>('note').deleteAt(index!);
+              },
               icon: const Icon(
                 FontAwesomeIcons.trash,
                 color: Colors.black,
@@ -40,9 +57,9 @@ class NoteItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 24),
             child: Text(
-              '28-10-2022',
+              "${DateFormat.yMMMEd().format(DateTime.now())} ${DateFormat.Hm().format(DateTime.now())}",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 12,
                 color: Colors.black.withOpacity(0.4),
               ),
             ),

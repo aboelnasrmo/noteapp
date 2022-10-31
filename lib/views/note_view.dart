@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/views/add_note.dart';
 import 'package:noteapp/views/widgets/notes_view_body.dart';
 
 class NotesView extends StatelessWidget {
@@ -7,10 +8,18 @@ class NotesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text(' + | add note'),
         backgroundColor: Colors.orange,
-        onPressed: () {},
-        child: const Icon(Icons.add, color: Colors.white),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return const AddNote();
+              },
+            ),
+          );
+        },
       ),
       body: const NotesViewBody(),
     );
