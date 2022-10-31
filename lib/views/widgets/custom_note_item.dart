@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/intl.dart';
 
 import '../../models/note.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({
     Key? key,
+    this.time,
     this.title,
     this.desc,
     this.index,
@@ -17,7 +17,7 @@ class NoteItem extends StatelessWidget {
   final String? title;
   final String? desc;
   final int? index;
-  // final Future<void> index;
+  final String? time;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class NoteItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 24),
             child: Text(
-              "${DateFormat.yMMMEd().format(DateTime.now())} ${DateFormat.Hm().format(DateTime.now())}",
+              time.toString(),
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.black.withOpacity(0.4),

@@ -33,7 +33,7 @@ class _ItemListState extends State<ItemList> {
                       title: note!.title.toString(),
                       desc: note.decs.toString(),
                       index: index,
-                      // index: box.deleteAt(index),
+                      time: note.time.toString(),
                     ),
                   );
                 },

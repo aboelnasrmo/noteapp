@@ -12,8 +12,11 @@ class Note {
   String? title;
   @HiveField(1)
   String? decs;
+  @HiveField(2)
+  String? time;
   Note({
     @required this.title,
     @required this.decs,
+    @required this.time,
   });
 }

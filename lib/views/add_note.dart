@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 
 import '../models/note.dart';
 
@@ -15,12 +16,16 @@ class _AddNoteState extends State<AddNote> {
   final _formKey = GlobalKey<FormState>();
   String? title;
   String? desc;
+  String? time;
 
   submitData() async {
     final isValid = _formKey.currentState!.validate();
+    time =
+        "${DateFormat.yMMMEd().format(DateTime.now())} ${DateFormat.Hm().format(DateTime.now())}";
+
     if (isValid) {
       Hive.box<Note>('note').add(
-        Note(title: title, decs: desc),
+        Note(title: title, decs: desc, time: time),
       );
       Navigator.of(context).pop();
     }
