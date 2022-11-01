@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../models/note.dart';
+import 'dart:math' as math;
 
 class NoteItem extends StatelessWidget {
   NoteItem({
@@ -24,7 +25,8 @@ class NoteItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(bottom: 24, left: 16, top: 24),
       decoration: BoxDecoration(
-        color: const Color(0xffffcc80),
+        color: Color((math.Random().nextDouble() * 0xFF1100).toInt())
+            .withOpacity(1.0),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
