@@ -7,7 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../models/note.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({
+  NoteItem({
     Key? key,
     this.time,
     this.title,
