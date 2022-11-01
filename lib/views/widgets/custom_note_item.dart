@@ -8,8 +8,9 @@ import '../../models/note.dart';
 import 'dart:math' as math;
 
 class NoteItem extends StatelessWidget {
-  NoteItem({
+  const NoteItem({
     Key? key,
+    this.color,
     this.time,
     this.title,
     this.desc,
@@ -19,6 +20,7 @@ class NoteItem extends StatelessWidget {
   final String? desc;
   final int? index;
   final String? time;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

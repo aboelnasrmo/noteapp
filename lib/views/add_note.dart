@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../models/note.dart';
@@ -17,6 +20,15 @@ class _AddNoteState extends State<AddNote> {
   String? title;
   String? desc;
   String? time;
+  XFile? image;
+
+  getImage() async {
+    final myImage =
+        await ImagePicker.platform.getImage(source: ImageSource.camera);
+    setState(() {
+      image = myImage;
+    });
+  }
 
   submitData() async {
     final isValid = _formKey.currentState!.validate();
@@ -25,7 +37,7 @@ class _AddNoteState extends State<AddNote> {
 
     if (isValid) {
       Hive.box<Note>('note').add(
-        Note(title: title, decs: desc, time: time),
+        Note(title: title, decs: desc, time: time, image: image!.path),
       );
       Navigator.of(context).pop();
     }
@@ -70,9 +82,17 @@ class _AddNoteState extends State<AddNote> {
                   });
                 },
               ),
+              const SizedBox(
+                height: 25,
+              ),
+              image == null ? Container() : Image.file(File(image!.path)),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: getImage,
+        child: const Icon(Icons.camera),
       ),
     );
   }

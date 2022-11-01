@@ -24,6 +24,7 @@ class _ItemListState extends State<ItemList> {
             valueListenable: Hive.box<Note>('note').listenable(),
             builder: (context, Box<Note> box, _) {
               return ListView.builder(
+                reverse: true,
                 itemCount: box.length,
                 itemBuilder: (context, index) {
                   final note = box.getAt(index);

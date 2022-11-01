@@ -20,19 +20,22 @@ class NoteAdapter extends TypeAdapter<Note> {
       title: fields[0] as String?,
       decs: fields[1] as String?,
       time: fields[2] as String?,
+      image: fields[3] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Note obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
       ..write(obj.decs)
       ..writeByte(2)
-      ..write(obj.time);
+      ..write(obj.time)
+      ..writeByte(3)
+      ..write(obj.image);
   }
 
   @override
