@@ -1,20 +1,19 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:noteapp/views/note_view.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:toast/toast.dart';
 
 import 'models/note.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Directory directory = await getApplicationDocumentsDirectory();
 
   await Hive.initFlutter();
   Hive.registerAdapter<Note>(NoteAdapter());
   await Hive.openBox<Note>('note');
+
   runApp(const NotesApp());
 }
 

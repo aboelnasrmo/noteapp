@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../models/note.dart';
 import 'dart:math' as math;
+import 'package:toast/toast.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({
@@ -24,6 +25,7 @@ class NoteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return Container(
       padding: const EdgeInsets.only(bottom: 24, left: 16, top: 24),
       decoration: BoxDecoration(
@@ -50,6 +52,12 @@ class NoteItem extends StatelessWidget {
             trailing: IconButton(
               onPressed: () {
                 Hive.box<Note>('note').deleteAt(index!);
+
+                Toast.show(
+                  "Deleted notes",
+                  duration: 2,
+                  gravity: Toast.bottom,
+                );
               },
               icon: const Icon(
                 FontAwesomeIcons.trash,

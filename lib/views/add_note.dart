@@ -37,7 +37,7 @@ class _AddNoteState extends State<AddNote> {
 
     if (isValid) {
       Hive.box<Note>('note').add(
-        Note(title: title, decs: desc, time: time, image: image!.path),
+        Note(title: title, decs: desc, time: time, image: image?.path),
       );
       Navigator.of(context).pop();
     }
